@@ -16,11 +16,18 @@
     background-clip: text;
 }
 .btnBg{
-    background: linear-gradient(to right, #0004ff,#00fff2);
+    background: linear-gradient(to right, #0003af,#00bbb2);
 }
 /* .text-sm {
     font-size: 12px;
 } */
  .none {
     display: none;
+ }
+ .homeRight::-webkit-scrollbar {
+    display: none;
+ }
+ .popbtn:active {
+    scale: 1.3;
+    transition: 0.2s;
  }
