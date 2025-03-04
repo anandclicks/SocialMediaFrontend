@@ -17,7 +17,7 @@ const Login = () => {
 {wantOtp ? (<VerifyOtp/>) : ( <LoginCom/>)}
 </div>
 <div className="login_right lg:h-full bg-stone-300 w-[50%] flex justify-center items-center btnBg   ">
-  <img src="https://cdni.iconscout.com/illustration/premium/thumb/social-media-feed-illustration-download-in-svg-png-gif-file-formats--like-logo-scrolling-pack-people-illustrations-6061611.png?f=webp" alt="" />
+  {/* <img src="https://cdni.iconscout.com/illustration/premium/thumb/social-media-feed-illustration-download-in-svg-png-gif-file-formats--like-logo-scrolling-pack-people-illustrations-6061611.png?f=webp" alt="" /> */}
 </div>
 </div>
   )
