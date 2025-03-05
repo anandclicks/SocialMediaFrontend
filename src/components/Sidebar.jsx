@@ -1,8 +1,13 @@
 import React from "react";
+import CreatePost from "./CreatePost";
 
 const Sidebar = () => {
   return (
     <div className="shadow p-4 py-6 rounded-lg w-[300px] ">
+      {/* create post component */}
+      {/* <div className="createPostWrapper fixed left-0 h-full w-[320px] top-0 z-30 bg-white">
+        <CreatePost/>
+      </div> */}
       {/* profile  */}
       <div className="info w-full h-min-[250px] relative">
         <div className="bannerImage w-full h-[100px] bg-stone-300 rounded-xl"></div>
@@ -23,8 +28,11 @@ const Sidebar = () => {
           <div className="flex flex-col items-center"><span className="font-semibold">0</span>Followers</div>
           <div className="flex flex-col items-center"><span className="font-semibold">0</span>Following</div>
         </div>
-        {/* go to profile button  */}
-        <button className="w-full h-[40px] btnBg text-white cursor-pointer mt-5 rounded-2xl">My Profile</button>
+        {/* action buttons  */}
+      <div className="flex justify-between">
+      {/* <button className="w-[47%] h-[40px] btnBg text-white cursor-pointer mt-5 rounded-xl text-sm"><i class="ri-edit-line"></i> Edit Profile</button> */}
+      <button className="w-[100%] h-[40px] btnBg text-white cursor-pointer mt-5 rounded-xl text-sm"><i class="ri-add-line"></i> Create Post</button>
+      </div>
       </div>
     </div>
   );
