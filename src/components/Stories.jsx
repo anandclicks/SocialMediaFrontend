@@ -5,7 +5,7 @@ import "swiper/swiper-bundle.css"; // Make sure to import Swiper styles
 const Stories = () => {
   return (
   <div>
-    <h3 className="text-xl">Stories</h3>
+    
       <Swiper spaceBetween={20} slidesPerView={6} loop={true}>
       <SwiperSlide>
         <div className="storySlide h-[180px] w-[120px] rounded-2xl bg-stone-200 relative cursor-pointer">

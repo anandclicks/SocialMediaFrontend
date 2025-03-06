@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import Stories from "../components/Stories";
 import Post from "../components/Post";
+import Notification from "../components/Notification";
+import SuggestionsUsercard from "../components/SuggestionsUsercard";
 
 const Home = () => {
   return (
@@ -12,13 +14,32 @@ const Home = () => {
       </div>
       <div className="homeRight p-4 w-[90%] overflow-scroll">
         {/* storeies  */}
-        <Stories/>
+        <div className="w-full flex justify-between">
+          <h3 className="text-xl">Stories</h3>
+          <Notification />
+        </div>
 
-        {/* posts  */}
-        <Post/>
-        <Post/>
-        <Post/>
-        
+        {/* stories  */}
+        <Stories />
+
+        {/* posts and suggestion ids */}
+        <div className="posts&notification flex">
+          <div>
+            <Post />
+            <Post />
+            <Post />
+          </div>
+          {/* suggestion ids */}
+          <div className="p-5 userSuggestion w-[400px]">
+            <h2 className="text-lg mb-3">Suggestions</h2>
+            <SuggestionsUsercard />
+            <SuggestionsUsercard />
+            <SuggestionsUsercard />
+            <SuggestionsUsercard />
+            <SuggestionsUsercard />
+            <SuggestionsUsercard />
+          </div>
+        </div>
       </div>
     </div>
   );
