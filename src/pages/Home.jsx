@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Stories from "../components/Stories";
 import Post from "../components/Post";
 import Notification from "../components/Notification";
 import SuggestionsUsercard from "../components/SuggestionsUsercard";
+import axios from "axios";
+import { LoggedInUserContent } from "../../contentProvider/LoggedinUser.content";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  // api call for autheticate user is loggedin or not 
+  const [redirect, setredirect] = useState(false)
+  const {setloggedInUser} = useContext(LoggedInUserContent)
+  const checkForUserAuthentication = async ()=> {
+    const response = await axios.get('/v1/users/loggedin-user-data',{withCredentials : true})
+    if(response.data.status){
+      setloggedInUser(response.data.user)
+    }else {
+      setredirect(true)
+    }
+  }
+
+  // handling redirection 
+  const navigate = useNavigate()
+  useEffect(()=> {
+    checkForUserAuthentication()
+    if(redirect){
+      navigate('/login')
+    }
+  },[redirect])
   return (
     <div className="p-5 h-[100vh] w-full flex overflow-x-hidden">
       <div className="homeLeft ">

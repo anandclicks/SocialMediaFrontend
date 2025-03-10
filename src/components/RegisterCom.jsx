@@ -1,9 +1,15 @@
-import React, { useContext, useState } from 'react'
-import { Link } from "react-router-dom"
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from "react-router-dom"
 import { OtpContet } from '../../contentProvider/Otp.content'
+import axios from 'axios'
+import { LoggedInUserContent } from '../../contentProvider/LoggedinUser.content'
+
 
 const RegisterCom = () => {
     const {setwantOtp} = useContext(OtpContet)
+    const [redirect, setredirect] = useState(false)
+    const {loggedInUser} = useContext(LoggedInUserContent)
+    
     // handling input and storing data in local
     const [formData, setformData] = useState({
       name : '',
@@ -16,8 +22,26 @@ const RegisterCom = () => {
       setformData(prev=>({...prev, [event.target.name] : event.target.value}))
     }
 
+    // api call for register 
+    const registerUser = async(evt)=> {
+      evt.preventDefault()
+      const response = await axios.post("/v1/users/register", {formData}, {withCredentials : true})
+      if(response.data.status == 200){
+        loggedInUser(response.data.user)
+        setredirect(true)
+      }
+    }
+
+    // redirection handling 
+    const navigate = useNavigate()
+    useEffect(()=> {
+      if(redirect){
+        navigate('/login')
+      }
+    },[redirect])
+
   return (
-    <form className=" w-[55%]">
+    <form onSubmit={registerUser()} className=" w-[55%]">
     <h2 className="text-4xl mb-1 signUpTitle">Sign up</h2>
     <p className=" leading-6 mb-4">Create Your Account in Just a Few Steps!</p>
     <input onChange={(evt)=> handleInput(evt)} value={formData.name} placeholder="Enter Name" name="name" required className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="text" />

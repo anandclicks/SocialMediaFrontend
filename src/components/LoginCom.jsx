@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginCom = () => {
   // handling input and storing data in local
+  const [redirect, setredirect] = useState(false)
   const [formData, setformData] = useState({
     email : '',
     password : ''
@@ -11,7 +13,23 @@ const LoginCom = () => {
     setformData(prev=> ({...prev,[event.target.name] : event.target.value}))
   }
 
+  // api call for user login 
+  const loginUser = async(evt)=> {
+    evt.preventDefault()
+    const response = await axios.post("/v1/users/login", {formData}, {withCredentials : true})
+    if(response.data.status == 200){
+      setLo
+      setredirect(true)
+    }
+  }
 
+  // handling redirection 
+  const navigate = useNavigate()
+  useEffect(()=> {
+    if(redirect){
+      navigate('/')
+    }
+  },[redirect])
 
   return (
         <form className=" w-[55%] ">
