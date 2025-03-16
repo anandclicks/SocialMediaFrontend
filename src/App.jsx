@@ -5,6 +5,7 @@ import { Route, Router, Routes } from 'react-router-dom'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
+import VerfiyUserOtp from './pages/VerfiyUserOtp.jsx'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login/>}/>
+        <Route path='/verify-otp' element={<VerfiyUserOtp/>} />
       </Routes>
     </>
   )

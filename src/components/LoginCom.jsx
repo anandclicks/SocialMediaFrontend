@@ -6,7 +6,7 @@ const LoginCom = () => {
   // handling input and storing data in local
   const [redirect, setredirect] = useState(false)
   const [formData, setformData] = useState({
-    email : '',
+    number : '',
     password : ''
   })
   const handleInput = (event)=> {
@@ -15,10 +15,13 @@ const LoginCom = () => {
 
   // api call for user login 
   const loginUser = async(evt)=> {
+
+    
     evt.preventDefault()
-    const response = await axios.post("/v1/users/login", {formData}, {withCredentials : true})
+    const response = await axios.post("http://localhost:3000/v1/users/login", {...formData}, {withCredentials : true})
+    console.log(response);
+    
     if(response.data.status == 200){
-      setLo
       setredirect(true)
     }
   }
@@ -32,10 +35,10 @@ const LoginCom = () => {
   },[redirect])
 
   return (
-        <form className=" w-[55%] ">
+        <form onSubmit={(evt)=> loginUser(evt)} className=" w-[55%] ">
     <h2 className="text-4xl mb-1 loginTitle">Login</h2>
     <p className=" leading-6 mb-4">Log In to Access Your Account and Enjoy Exclusive Features!</p>
-    <input onChange={(evt)=> handleInput(evt)} value={formData.email} placeholder="Enter Email" required name="email" className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="email" />
+    <input onChange={(evt)=> handleInput(evt)} value={formData.number} placeholder="Enter Number" required name="number" className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="number" />
     <input  onChange={(evt)=> handleInput(evt)} value={formData.password} placeholder="Enter Password" required name="password" className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="text" />
 
     {/* submit btn  */}

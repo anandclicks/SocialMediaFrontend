@@ -9,26 +9,28 @@ import { LoggedInUserContent } from "../../contentProvider/LoggedinUser.content"
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  // api call for autheticate user is loggedin or not 
-  const [redirect, setredirect] = useState(false)
-  const {setloggedInUser} = useContext(LoggedInUserContent)
-  const checkForUserAuthentication = async ()=> {
-    const response = await axios.get('/v1/users/loggedin-user-data',{withCredentials : true})
-    if(response.data.status){
-      setloggedInUser(response.data.user)
-    }else {
-      setredirect(true)
+  // api call for autheticate user is loggedin or not
+  const [redirect, setredirect] = useState(false);
+  const { setloggedInUser } = useContext(LoggedInUserContent);
+  const checkForUserAuthentication = async () => {
+    const response = await axios.get("/v1/users/loggedin-user-data", {
+      withCredentials: true,
+    });
+    if (response.data.status) {
+      setloggedInUser(response.data.user);
+    } else {
+      setredirect(false);
     }
-  }
+  };
 
-  // handling redirection 
-  const navigate = useNavigate()
-  useEffect(()=> {
-    checkForUserAuthentication()
-    if(redirect){
-      navigate('/login')
+  // handling redirection
+  const navigate = useNavigate();
+  useEffect(() => {
+    checkForUserAuthentication();
+    if (redirect) {
+      navigate("/login");
     }
-  },[redirect])
+  }, [redirect]);
   return (
     <div className="p-5 h-[100vh] w-full flex overflow-x-hidden">
       <div className="homeLeft ">

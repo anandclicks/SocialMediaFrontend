@@ -8,7 +8,7 @@ import { LoggedInUserContent } from '../../contentProvider/LoggedinUser.content'
 const RegisterCom = () => {
     const {setwantOtp} = useContext(OtpContet)
     const [redirect, setredirect] = useState(false)
-    const {loggedInUser} = useContext(LoggedInUserContent)
+    const {loggedInUser,setloggedInUser} = useContext(LoggedInUserContent)
     
     // handling input and storing data in local
     const [formData, setformData] = useState({
@@ -25,9 +25,11 @@ const RegisterCom = () => {
     // api call for register 
     const registerUser = async(evt)=> {
       evt.preventDefault()
-      const response = await axios.post("/v1/users/register", {formData}, {withCredentials : true})
+      const response = await axios.post("http://localhost:3000/v1/users/register", {...formData}, {withCredentials : true})
+      console.log(response);
+      
       if(response.data.status == 200){
-        loggedInUser(response.data.user)
+        setloggedInUser(response.data.user)
         setredirect(true)
       }
     }
@@ -36,12 +38,12 @@ const RegisterCom = () => {
     const navigate = useNavigate()
     useEffect(()=> {
       if(redirect){
-        navigate('/login')
+        navigate('/verify-otp')
       }
     },[redirect])
 
   return (
-    <form onSubmit={registerUser()} className=" w-[55%]">
+    <form onSubmit={(evt)=> registerUser(evt)} className=" w-[55%]">
     <h2 className="text-4xl mb-1 signUpTitle">Sign up</h2>
     <p className=" leading-6 mb-4">Create Your Account in Just a Few Steps!</p>
     <input onChange={(evt)=> handleInput(evt)} value={formData.name} placeholder="Enter Name" name="name" required className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="text" />
