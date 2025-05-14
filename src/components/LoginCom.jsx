@@ -21,7 +21,7 @@ const LoginCom = () => {
     const response = await axios.post("http://localhost:3000/v1/users/login", {...formData}, {withCredentials : true})
     console.log(response);
     
-    if(response.data.status == 200){
+    if(response.status == 200){
       setredirect(true)
     }
   }
@@ -31,11 +31,13 @@ const LoginCom = () => {
   useEffect(()=> {
     if(redirect){
       navigate('/')
+      console.log('hello');
+      
     }
   },[redirect])
 
   return (
-        <form onSubmit={(evt)=> loginUser(evt)} className=" w-[55%] ">
+        <form onSubmit={(evt)=> loginUser(evt)} className=" w-[55%] " encType=''>
     <h2 className="text-4xl mb-1 loginTitle">Login</h2>
     <p className=" leading-6 mb-4">Log In to Access Your Account and Enjoy Exclusive Features!</p>
     <input onChange={(evt)=> handleInput(evt)} value={formData.number} placeholder="Enter Number" required name="number" className="text-sm h-[40px] w-[100%] border-[1px] border-stone-400 outline-0 p-3 rounded-full mb-4" type="number" />

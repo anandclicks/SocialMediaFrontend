@@ -38,7 +38,7 @@ const RegisterCom = () => {
     const navigate = useNavigate()
     useEffect(()=> {
       if(redirect){
-        navigate('/verify-otp')
+        navigate('/login')
       }
     },[redirect])
 

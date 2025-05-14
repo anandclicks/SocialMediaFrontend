@@ -32,7 +32,7 @@ const Home = () => {
     }
   }, [redirect]);
   return (
-    <div className="p-5 h-[100vh] w-full flex overflow-x-hidden">
+    <div className="p-5 h-[100vh] w-full flex overflow-x-hidden max-w-[70%] mx-auto">
       <div className="homeLeft ">
         {/* sidebar  */}
         <Sidebar />
